@@ -17,7 +17,7 @@ All fields are requided, but not setting `not null` in db because the common pra
  batch
  table.
 3) `xml_batch_id`: `integer`. Not simply naming `batch_id` because of confusion with primary keys.
-4) `creation_date`: `timestamp`. Not `date` because of ActiveRecord.
+4) `creation_date`: `date`.
 5) `created_at`, `updated_at`: `timestamp`. Default ActiveRecord columns.
 
 ###invoices table
@@ -26,8 +26,10 @@ All fields are requided, but not setting `not null` in db because the common pra
  not, this column may be deleted to save space.
 2) `company_code`: `integer`.
 3) `operation_number`: `integer`.
-4) `operation_date`: `timestamp`. Not `date` because of ActiveRecord.
+4) `operation_date`: `date`.
 5) `created_at`, `updated_at`: `timestamp`. Default ActiveRecord columns.
+
+Indexes: `batch_id` (default Rails)
 
 ###invoice_data table
 1) `id`: `bigserial`, primary key.
