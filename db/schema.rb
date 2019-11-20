@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_221337) do
+ActiveRecord::Schema.define(version: 2019_11_20_224206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 2019_11_20_221337) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "invoice_data", force: :cascade do |t|
+    t.bigint "invoice_id", null: false
+    t.string "parcel_code"
+    t.integer "item_qty"
+    t.integer "parcel_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invoice_id"], name: "index_invoice_data_on_invoice_id"
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.bigint "batch_id", null: false
     t.integer "company_code"
@@ -33,5 +43,6 @@ ActiveRecord::Schema.define(version: 2019_11_20_221337) do
     t.index ["batch_id"], name: "index_invoices_on_batch_id"
   end
 
+  add_foreign_key "invoice_data", "invoices"
   add_foreign_key "invoices", "batches"
 end
