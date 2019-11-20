@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe Batch, type: :model do
   subject { build(:batch) }
 
+  it { should have_many(:invoices) }
+
   it { should validate_presence_of(:guid) }
   it { should validate_length_of(:guid).is_equal_to(32) }
 
