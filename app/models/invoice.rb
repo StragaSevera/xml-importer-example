@@ -2,7 +2,7 @@
 
 class Invoice < ApplicationRecord
   belongs_to :batch
-  has_many :invoice_data
+  has_many :invoice_data, dependent: :destroy
 
   validates :invoice_data, length: { in: 1..10 }
   validates :company_code, presence: true, inclusion: 0..9999

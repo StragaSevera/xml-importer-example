@@ -7,7 +7,7 @@ RSpec.describe Invoice, type: :model do
 
   it { should belong_to(:batch) }
 
-  it { should have_many(:invoice_data) }
+  it { should have_many(:invoice_data).dependent(:destroy) }
   # Shoulda Matchers do not have the way to validate association count
   [1, 5, 10].each do |i|
     it "is valid with invoice data count: #{i}" do
