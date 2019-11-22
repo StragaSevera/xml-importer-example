@@ -9,6 +9,7 @@ RSpec.describe InvoiceDatum, type: :model do
 
   it { should validate_presence_of(:parcel_code) }
   it { should validate_length_of(:parcel_code).is_equal_to(15) }
+  it { should validate_uniqueness_of(:parcel_code).case_insensitive }
 
   it { should validate_presence_of(:item_qty) }
   it { should validate_inclusion_of(:item_qty).in_range(0..50) }

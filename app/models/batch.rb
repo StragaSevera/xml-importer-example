@@ -2,7 +2,7 @@
 
 class Batch < ApplicationRecord
   has_many :invoices, dependent: :destroy
-  validates :guid, presence: true, length: { is: 32 }
-  validates :xml_batch_id, presence: true
+  validates :guid, presence: true, length: { is: 32 }, uniqueness: true
+  validates :xml_batch_id, presence: true, uniqueness: true
   validates :creation_date, presence: true
 end

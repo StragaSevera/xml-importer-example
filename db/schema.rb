@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_204528) do
+ActiveRecord::Schema.define(version: 2019_11_22_223910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_11_22_204528) do
     t.date "creation_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["guid"], name: "index_batches_on_guid", unique: true
+    t.index ["xml_batch_id"], name: "index_batches_on_xml_batch_id", unique: true
   end
 
   create_table "invoice_data", force: :cascade do |t|
@@ -31,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_204528) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["invoice_id"], name: "index_invoice_data_on_invoice_id"
-    t.index ["parcel_code"], name: "index_invoice_data_on_parcel_code"
+    t.index ["parcel_code"], name: "index_invoice_data_on_parcel_code", unique: true
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -42,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_204528) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["batch_id"], name: "index_invoices_on_batch_id"
-    t.index ["operation_number"], name: "index_invoices_on_operation_number"
+    t.index ["operation_number"], name: "index_invoices_on_operation_number", unique: true
   end
 
   add_foreign_key "invoice_data", "invoices"
