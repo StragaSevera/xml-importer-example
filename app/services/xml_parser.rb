@@ -2,16 +2,20 @@
 
 class XmlParser
   def initialize(data_string)
-    @data_string = data_string
+    @doc = Nokogiri::XML(data_string)
+    raise ArgumentError unless @doc.errors.empty?
+  end
+
+  def guid
+    @doc.at_xpath('//GUID').content
   end
 
   def parse
-    doc = Nokogiri::XML(@data_string)
     batch = Batch.new
-    batch.guid = doc.at_xpath('//GUID').content
-    batch.xml_batch_id = doc.at_xpath('//BatchID').content
-    batch.creation_date = doc.at_xpath('//CreationDate').content
-    each_invoice(doc) { |invoice| batch.invoices << invoice }
+    batch.guid = guid
+    batch.xml_batch_id = @doc.at_xpath('//BatchID').content
+    batch.creation_date = @doc.at_xpath('//CreationDate').content
+    each_invoice(@doc) { |invoice| batch.invoices << invoice }
     batch
   end
 
