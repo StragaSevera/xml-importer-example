@@ -39,7 +39,7 @@ group :development, :test do
   gem 'guard', '~> 2.16'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 4.0.0.beta3'
 end
 
 group :development do
@@ -53,6 +53,7 @@ group :development do
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
 end
 

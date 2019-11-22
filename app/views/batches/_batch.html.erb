@@ -1,0 +1,12 @@
+<h2>Batch #<%=batch.xml_batch_id%></h2>
+<p>Date: <%=batch.creation_date%>, GUID: <%=batch.guid%> <%=button_to 'Delete', { action: :destroy, id: batch.id },         method: :delete, data: { confirm: "Are you sure?" }
+%></p>
+<% batch.invoices.each do |invoice| %>
+  <h3>Invoice #<%=invoice.operation_number%></h3>
+  <p>Company code: <%=invoice.company_code%></p>
+  <p>Date: <%=invoice.operation_date%></p>
+  <% invoice.invoice_data.each do |datum| %>
+    <p>Product #<%=datum.parcel_code%>, quantity: <%=datum.item_qty%>, price: <%=datum
+                                                                                .parcel_price%></p>
+  <% end %>
+<% end %>
