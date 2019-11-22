@@ -1,8 +1,5 @@
 #Xml Importer Example
-This example project is made for importing information about batches of invoices into BD.
-
-##TODO:
-Make indexes
+This example project is made for importing information about batches of invoices into DB.
 
 ##Database structure
 All fields are requided, but not setting `not null` in db because the common practics is to
@@ -29,7 +26,7 @@ All fields are requided, but not setting `not null` in db because the common pra
 4) `operation_date`: `date`.
 5) `created_at`, `updated_at`: `timestamp`. Default ActiveRecord columns.
 
-Indexes: `batch_id` (default Rails)
+Indexes: `batch_id` (default Rails), `operation_number`
 
 ###invoice_data table
 1) `id`: `bigserial`, primary key.
@@ -37,4 +34,6 @@ Indexes: `batch_id` (default Rails)
 3) `parcel_code`: `varchar(15)`. Assuming that, because leading zeroes are significant
 , `000007400042141 != 7400042141`, therefore, using a text column type.
 4) `item_qty`: `integer`. Not `smallint` because of ActiveRecord.
-5) `parcel_price`: `integer`. Assuming that all prices are integral, not using `decimal` type. 
+5) `parcel_price`: `integer`. Assuming that all prices are integral, not using `decimal` type.
+
+Indexes: `invoice_id` (default Rails), `parcel_code` 
