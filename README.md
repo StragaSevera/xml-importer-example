@@ -1,10 +1,10 @@
-#Xml Importer Example
+# Xml Importer Example
 This example project is made for importing information about batches of invoices into DB.
 
-##Database structure
+## Database structure
 All fields are requided, but not setting `not null` in db because the common practics is to
  validate it in the Rails.
-###batches table
+### batches table
 1) `id`: `bigserial`, primary key. Not `serial` because Rails uses `bigserial` by default in case
  that `serial` will be too small.
 2) `guid`: `varchar(32)`, unique. Not `uuid` because ActiveRecord does not support it natively
@@ -18,7 +18,7 @@ All fields are requided, but not setting `not null` in db because the common pra
 4) `creation_date`: `date`.
 5) `created_at`, `updated_at`: `timestamp`. Default ActiveRecord columns.
 
-###invoices table
+### invoices table
 1) `id`: `bigserial`, primary key.
 2) `batch_id`: `bigint`, foreign key. Assuming that batches have a business value themselves, if
  not, this column may be deleted to save space.
@@ -29,7 +29,7 @@ All fields are requided, but not setting `not null` in db because the common pra
 
 Indexes: `batch_id` (default Rails), `operation_number`
 
-###invoice_data table
+### invoice_data table
 1) `id`: `bigserial`, primary key.
 2) `invoice_id`: `bigint`, foreign key.
 3) `parcel_code`: `varchar(15)`, unique. Assuming that, because leading zeroes are significant
