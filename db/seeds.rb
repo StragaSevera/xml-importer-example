@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-require_relative '../spec/services/data/sales_data'
-batch = XmlParser.new(SALES_DATA).parse
+batch = XmlParser.new(File.read('spec/fixtures/files/sales_data.xml')).parse
 batch.save!
