@@ -61,8 +61,20 @@ RSpec.describe XmlParser do
   end
 
   context 'with invalid file' do
-    it 'raises an ArgumentError' do
+    it 'raises an ArgumentError when file is corrupted' do
       expect { XmlParser.new(File.read('spec/fixtures/files/invalid_data.xml')) }
+        .to raise_error ArgumentError
+    end
+
+    it 'raises an ArgumentError when content is missing' do
+      parser = XmlParser.new(File.read('spec/fixtures/files/invalid_data_02.xml'))
+      expect { parser.parse }
+        .to raise_error ArgumentError
+    end
+
+    it 'raises an ArgumentError when guid is missing' do
+      parser = XmlParser.new(File.read('spec/fixtures/files/invalid_data_03.xml'))
+      expect { parser.guid }
         .to raise_error ArgumentError
     end
   end
